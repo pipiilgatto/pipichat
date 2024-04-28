@@ -20,9 +20,9 @@ def main():
     groq_api_key = os.environ['GROQ_API_KEY']
 
     # Display the Groq logo
-    spacer, col = st.columns([5, 1])  
+    spacer, col = st.columns([4, 1])  
     with col:  
-        st.image('Pipi.png')
+        st.image('Pipi_new.png')
 
     # The title and greeting message of the Streamlit application
     st.title("Chat with Pipi!")
