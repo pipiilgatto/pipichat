@@ -59,8 +59,6 @@ def main():
             memory=memory
     )
 
-    tts = gTTS('Add text-to-speech to your app', lang='en')
-
     # If the user has asked a question,
     if user_question:
         
@@ -68,10 +66,12 @@ def main():
         response = conversation(user_question)
         message = {'human':user_question,'AI':response['response']}
         st.session_state.chat_history.append(message)
-        st.write("Pipi:", response['response'])
-
-        tts.write_to_fp(response['response'])
-        st.audio(response['response'])
+        text = response['response']
+        st.write("Pipi: ", text)
+        
+        tts = gTTS(text=f"{text}",lang='en')
+        tts.save('answer.mp3')
+        st.audio("answer.mp3",format="audio/mpeg", loop=True)
         
 if __name__ == "__main__":
     main()
