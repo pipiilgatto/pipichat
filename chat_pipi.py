@@ -71,7 +71,7 @@ def main():
         
         tts = gTTS(text=f"{text}",lang='en')
         tts.save('answer.mp3')
-        st.audio("answer.mp3",format="audio/mpeg", loop=True)
+        st.audio("answer.mp3",format="audio/mpeg", loop=False)
         
 if __name__ == "__main__":
     main()
