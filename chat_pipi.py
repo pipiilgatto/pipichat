@@ -20,7 +20,7 @@ def main():
     groq_api_key = os.environ['GROQ_API_KEY']
 
     # Display the Groq logo
-    spacer, col = st.columns([4, 1])  
+    spacer, col = st.columns([7, 1])  
     with col:  
         st.image('pipi_pic.png')
 
