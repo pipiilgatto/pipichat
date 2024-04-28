@@ -2,6 +2,8 @@ import streamlit as st
 import os
 from groq import Groq
 import random
+from gtts import gTTS
+
 
 from langchain.chains import ConversationChain
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
@@ -18,7 +20,7 @@ def main():
     groq_api_key = os.environ['GROQ_API_KEY']
 
     # Display the Groq logo
-    spacer, col = st.columns([5, 1])  
+    spacer, col = st.columns([4, 1])  
     with col:  
         st.image('pipi_pic.png')
 
@@ -32,11 +34,11 @@ def main():
         'Choose a model',
         ['llama3-70b-8192','mixtral-8x7b-32768']
     )
-    conversational_memory_length = st.sidebar.slider('Conversational memory length:', 1, 10, value = 5)
+    # conversational_memory_length = st.sidebar.slider('Conversational memory length:', 1, 10, value = 5)
 
-    memory=ConversationBufferWindowMemory(k=conversational_memory_length)
+    memory=ConversationBufferWindowMemory(k=6)
 
-    user_question = st.text_input("Ask your question:")
+    user_question = st.text_input("Write your question here!")
 
     # session state variable
     if 'chat_history' not in st.session_state:
@@ -57,6 +59,8 @@ def main():
             memory=memory
     )
 
+    tts = gTTS('Add text-to-speech to your app', lang='en')
+
     # If the user has asked a question,
     if user_question:
         
@@ -66,6 +70,9 @@ def main():
         st.session_state.chat_history.append(message)
         st.write("Pipi:", response['response'])
 
+        tts.write_to_fp(response['response'])
+        st.audio(response['response'])
+        
 if __name__ == "__main__":
     main()
 
