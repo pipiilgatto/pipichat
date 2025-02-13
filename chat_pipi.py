@@ -32,11 +32,11 @@ def main():
     st.sidebar.title('Customization')
     model = st.sidebar.selectbox(
         'Choose a model',
-        ['llama3-70b-8192','mixtral-8x7b-32768','llama-3.1-70b-versatile']
+        ['deepseek-r1-distill-llama-70b','llama-3.3-70b-versatile']
     )
     # conversational_memory_length = st.sidebar.slider('Conversational memory length:', 1, 10, value = 5)
 
-    memory=ConversationBufferWindowMemory(k=6)
+    memory=ConversationBufferWindowMemory(k=10)
 
     user_question = st.text_input("Write your question here!")
 
